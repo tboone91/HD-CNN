@@ -301,6 +301,10 @@ class Cars:
     
         
         self.X_train=X
+        
+        self.X_test=X_test[2500:]
+        
+        self.X_val=X_test[:2500]
 
         self.y_train = [lab1, lab2, lab3]
         
