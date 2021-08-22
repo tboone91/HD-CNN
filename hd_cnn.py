@@ -20,20 +20,20 @@ import seaborn as sns
 from graphviz import Digraph
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
-from data import Birds
+from data import Birds,Cars
 from sklearn.metrics import accuracy_score
 from numpy import save,load
 
 
 #Load dataset
 
-dataset=Birds()
+dataset=Cars()
 #u = dataset.draw_taxonomy()
 #u.view()
 
 #Set variables
 
-epochs=1
+epochs=10
 batch=100
 
 
@@ -96,8 +96,7 @@ def HD_CNN(coarse_lv,fine_lv,epochs_c,epochs_f):
     
         fine_model.fit(x_tix, y_tix, 
                        batch_size=batch, 
-                       epochs=epochs_f,
-                       callbacks=[early_stopping_callback]
+                       epochs=epochs_f
                        )
         
         fine_model.save_weights('fine_models/fine_model'+str(i))
@@ -134,14 +133,13 @@ def HD_CNN(coarse_lv,fine_lv,epochs_c,epochs_f):
     return yh_c_index,yh_index
 
 
-yhc1,yh1 = HD_CNN(0,1,2,2)
+yhc1,yh1 = HD_CNN(0,1,30,10)
 
-#filename='c_pred2.npy'
-#save(filename, c_pred2)
-#filename='f_pred2.npy'
-#save(filename, f_pred2)
-#filename='acc2.npy'
-#save(filename, acc2)
+filename='c_pred2.npy'
+save(filename, yhc1)
+filename='f_pred1.npy'
+save(filename, yh1)
+
 
 #c_pred1,f_pred1,acc1 = HD_CNN(0,1,10,10)
 
